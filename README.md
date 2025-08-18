@@ -1,9 +1,9 @@
-Q. What is object oriented Programming?
+### Q. What is object oriented Programming?
 -> object oriented programming is software paradigm (style of programming) that oraganize software design around object rather than function and the logic.
  
  oops helps to make code modular and reusable manintanable and closer to the real world.
 
-Q. what is difference between class and  object ?
+### Q. what is difference between class and  object ?
  -> Classes: is a blueprint of object and its is logical entity.
   note:it does not occupy any space in the memory.
 
@@ -11,7 +11,7 @@ Q. what is difference between class and  object ?
 
    Example: Animal is a class and the Dog, Cat, Tiger is a Objects.
 
-Q. What is COnstructor ?
+### Q. What is COnstructor ?
 -> Constructor is similar to the method that is invoked when the object of the class get created.
    constructor is used to intialize the object whose name is same as a class name and does not have any retun type not even void 
 
@@ -20,11 +20,11 @@ Q. What is COnstructor ?
    2. Parameterized Constructor // when we pass any argument 
    3. Default Constructor  // when we do not create any constructor but the object is created basically so basically in system default constructor get created 
 
-Q. What is Constructor Overloading? 
+### Q. What is Constructor Overloading? 
 
 -> When we have more than one Constuctor within the class with the same name but differnet parameter we called as constructor overloading.
 
-Q. What is access Modifier?
+### Q. What is access Modifier?
 
 -> Access Modifier is used to set accessibilty(visibility) of the classes,interfaces, method ,variable 
 
@@ -32,7 +32,7 @@ Q. What is access Modifier?
  Private  :It can only accessible within the class itself and if we have access the value form the private keyword then  we used  getter and setter method.
 
 
-       ```package OOPSConcept.L1;
+ ```package OOPSConcept.L1;
        public class PrivateAccessModifier {
 
         /*if we have to accesss the value from the private modifier for that we 
@@ -56,12 +56,13 @@ Q. What is access Modifier?
            { 
               return this.name=name;
             }
-          }```
+          }
+ ```
 
  public : It can visible everywhere.
  Protected : It is visible within the pacakge and the subclasses.
 
- Q.  What is this keyword and why it is used ?
+### Q.  What is this keyword and why it is used ?
  -> this keyword is used to refer to the current object inside the method or the constructor 
           
   ```package OOPSConcept.L1;
@@ -84,4 +85,56 @@ class isThis{
      }
 }
 ```
+
+Uses of this keyword avoid naming ambiguity.  also we can take this as a argument 
+
+
+### Q. Why we use Super Keyword in java?
+-> The super keyword in Java is used when working with inheritance (child and parent classes). It always refers to the parent class (superclass) of the current object.
+
+  and through super keyword we can access the constructor,method,variable of parent class into the child class 
+
+  if we have to use super keyword for constructor ->super(parameter);
+  if we have to use super keyword for variable ->super.variableName;
+  if we have to use super keyword for method ->super.methodName();
+
+
+### Q. What is Method Overrinding?
+-> When we have more than one method within the same class or its subclass with the same name and the same parameter we called it as a method overriding. 
+
+### Q. What is inheritance ?
+-> Inheritance is a concept that allow us to create a new class i.e Subclass from the existing class i.e Super class
+
+note: inheritance can only be use when there exists an is-a relationship between two classes.
+
+Types of inheritance
+1.single level Inheritance
+2.multi-level inheritance
+3.herarchical inheritance
+4.multiple inheritance
+5.hybrid inheritance :combination of two or more inheritance
+
+### Q. What is Abstraction?
+-> Absraction is a concept of oops that allows us to hide the unneccessary details and show only neccessary information to the user.
+and we achieve abstraction through abstract keyword.
+
+### Q.What is the use of abstaract keyword ?
+-> if we declere any variable or class or method we do not need to create a object for it we can directly access it 
+
+### Q. Why abstract methods have no body?
+
+An abstract method is just a declaration, not an implementation.
+
+It defines what should be done but not how it should be done.
+
+The actual implementation is left to the subclasses. 
+also if we have declare any method with the abstract keyword then we always need to declare the class as a abstract class
+
+
+### Q. Why do we use it if it has no body?
+
+The use of abstract methods is in polymorphism and enforcing rules.
+
+It acts like a contract:
+Any class that extends the abstract class must provide an implementation for the abstract methods.
 
