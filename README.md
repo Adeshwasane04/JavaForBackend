@@ -138,3 +138,12 @@ The use of abstract methods is in polymorphism and enforcing rules.
 It acts like a contract:
 Any class that extends the abstract class must provide an implementation for the abstract methods.
 
+### Some important points about abstract class
+
+-> We use abstract keyword to create abstract classs and the abstract method 
+-> An abstract method does not have any implementation (method body)
+-> A class containaing abstract method should be abstract
+-> We cannot create a object for the abstract class
+-> TO immplement the feature of the abstrct class , we inherit subclasses from it and create a object of the subclasses 
+-> A subclass must be override all abstarct method of an abstrct class.
+-> *important* we can access the static atttributes and the method of an abstrct claass using the reference of abstrct class
