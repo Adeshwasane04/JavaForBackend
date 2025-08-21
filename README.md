@@ -130,6 +130,7 @@ It defines what should be done but not how it should be done.
 The actual implementation is left to the subclasses. 
 also if we have declare any method with the abstract keyword then we always need to declare the class as a abstract class
 
+Important Note: When we are using hiding data its means hiding with respect to the object 
 
 ### Q. Why do we use it if it has no body?
 
@@ -157,12 +158,166 @@ Any class that extends the abstract class must provide an implementation for the
     }
     ```
 
-like abstaract classes we cannot create a object for interfaces.
+like abstaract classes we cannot create a object for interfaces. and it do not have any constructor
 Interface = contract/blueprint.
 
 We use it for abstraction, multiple inheritance, loose coupling, and polymorphism.
 
+Ex:Drive through
+
+### Why We can not Perform multiple inheritance in Java ?
+
+  Java does not support multiple inheritance with classes to avoid ambiguity (Diamond Problem) and to keep the design simple and more maintainable.
+   Instead, Java provides interfaces which allow multiple inheritance in a safe way.
+
+   ```
+   interface A {
+    void show();
+}
+
+interface B {
+    void show();
+}
+
+class C implements A, B {
+    public void show() {
+        System.out.println("C’s own show");
+    }
+}
+```
+### Q. Why We Use default Keyword in Interfaces (Java 8 onwards)
+->  1. To Add New Methods Without Breaking Old Code
+
+Before Java 8, if you added a new method in an interface, all implementing classes had to override it → this broke existing code.
+
+With default methods, you can add a new method with a default implementation in the interface, so old classes still compile without changes.
+
+2. Provide Reusable Common Code
+
+Interfaces can now contain methods with body (using default) that provide a common implementation for all implementing classes.
+
+Classes can use it as-is or override it.
+
+```
+interface Vehicle {
+    void start();  // abstract method
+
+    // default method
+    default void honk() {
+        System.out.println("Beep! Beep!");
+    }
+}
+
+class Car implements Vehicle {
+    public void start() {
+        System.out.println("Car started");
+    }
+}
+
+class Bike implements Vehicle {
+    public void start() {
+        System.out.println("Bike started");
+    }
+
+    // Override default method
+    public void honk() {
+        System.out.println("Bike horn sound");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle car = new Car();
+        car.start();
+        car.honk();   // uses default method
+
+        Vehicle bike = new Bike();
+        bike.start();
+        bike.honk();  // uses overridden method
+    }
+}
+```
+
+### What is an enum (Enumeration) in Java?
+
+An enum is a special class in Java used to represent a group of constants (fixed set of values).
+
+Instead of using plain integers or strings, enums give meaningful names to constants.
+
+By default, all enums extend java.lang.Enum.
+
+```
+enum Day {
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Day today = Day.MONDAY;
+        System.out.println("Today is: " + today);
+    }
+}
+```
+
+### Q. What is instance of keyword in java? 
+--> instance of is a key operator in java it is used to check if the object is an instance of a perticular class or a subclass it return  a boolean value 
+
+note:If the object is null, instanceof always returns false.
+
 ### Software Design Principal : 
+ SOLID:
+ S -> Single Responsibility Principal
+ O -> Open Closed Principal: a class should open for extension but closed for modification.
+ L -> Liskov Substitution Principle (LSP) :
+  Objects of a superclass should be replaceable with objects of its subclasses without breaking the application.
+   
+   In other words:
+
+If B is a subclass of A, then we should be able to use an object of B wherever A is expected, and the program should still work correctly.
+
+A subclass should not violate the behavior/contract of its parent class.
+
+Example (Violating LSP)
+```
+class Bird {
+    void fly() {
+        System.out.println("I can fly");
+    }
+}
+
+class Ostrich extends Bird {
+    @Override
+    void fly() {
+        throw new UnsupportedOperationException("Ostrich can't fly");
+    }
+}
+```
+
+👉 Here, Ostrich is a Bird, but it cannot fly.
+If code expects a Bird that can always fly(), substituting it with an Ostrich will break the program.
+This violates LSP.
+
+Correct Design (Following LSP)
+```
+abstract class Bird { }
+
+class FlyingBird extends Bird {
+    void fly() {
+        System.out.println("I can fly");
+    }
+}
+
+class Sparrow extends FlyingBird { }
+class Ostrich extends Bird { } // no fly() method
+```
+
+👉 Now,
+
+Sparrow can fly.
+
+Ostrich cannot fly.
+
+We separated behavior into proper hierarchy → follows LSP.
 ## Low-Level Design
 
 Definition: Low-Level Design is the process of breaking down a system (from High-Level Design) into detailed class diagrams, methods, relationships, and interactions.
@@ -174,5 +329,4 @@ It focuses on how things will be implemented in code.
 It is one of the SOLID principles in software design.
 Definition: A class should have only one reason to change.
 In simple words, a class should do only one job.
-
 and it helps to make code maintanable and the readable 
