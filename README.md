@@ -269,7 +269,22 @@ note:If the object is null, instanceof always returns false.
  S -> Single Responsibility Principal
  O -> Open Closed Principal: a class should open for extension but closed for modification.
  L -> Liskov Substitution Principle (LSP) :
-  Objects of a superclass should be replaceable with objects of its subclasses without breaking the application.
+ 
+## Low-Level Design
+
+Definition: Low-Level Design is the process of breaking down a system (from High-Level Design) into detailed class diagrams, methods, relationships, and interactions.
+
+It focuses on how things will be implemented in code.
+
+## Single Responsibility Principle (SRP)
+
+It is one of the SOLID principles in software design.
+Definition: A class should have only one reason to change.
+In simple words, a class should do only one job.
+and it helps to make code maintanable and the readable 
+
+### Liskov Substitution Principle (LSP)
+ Objects of a superclass should be replaceable with objects of its subclasses without breaking the application.
    
    In other words:
 
@@ -318,15 +333,6 @@ Sparrow can fly.
 Ostrich cannot fly.
 
 We separated behavior into proper hierarchy → follows LSP.
-## Low-Level Design
 
-Definition: Low-Level Design is the process of breaking down a system (from High-Level Design) into detailed class diagrams, methods, relationships, and interactions.
+for more reference check: [text](https://reflectoring.io/lsp-explained/)
 
-It focuses on how things will be implemented in code.
-
-## Single Responsibility Principle (SRP)
-
-It is one of the SOLID principles in software design.
-Definition: A class should have only one reason to change.
-In simple words, a class should do only one job.
-and it helps to make code maintanable and the readable 
