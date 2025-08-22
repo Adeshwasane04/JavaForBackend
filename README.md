@@ -269,7 +269,8 @@ note:If the object is null, instanceof always returns false.
  S -> Single Responsibility Principal
  O -> Open Closed Principal: a class should open for extension but closed for modification.
  L -> Liskov Substitution Principle (LSP) :
- 
+ I -> Interface seggregation principal 
+ D -> Dependency Inversion principal 
 ## Low-Level Design
 
 Definition: Low-Level Design is the process of breaking down a system (from High-Level Design) into detailed class diagrams, methods, relationships, and interactions.
@@ -336,3 +337,141 @@ We separated behavior into proper hierarchy → follows LSP.
 
 for more reference check: [text](https://reflectoring.io/lsp-explained/)
 
+### Interface seggregation principal :
+
+-> ISP state that no client should be forced to exibits behaviour .
+this happen because of bulkey interfaces / abstract classes 
+ISP is SRP for interfaces 
+
+“No client should be forced to depend on methods it does not use.”
+
+In simple words, instead of having one big interface with many unrelated methods, we should split it into smaller, more specific interfaces. That way, a class only needs to implement the methods that are actually relevant to it.
+
+ Problem Without ISP:
+
+If we have a large interface:
+
+ ``` interface Worker {
+    void work();
+    void eat();
+    void sleep();
+}
+```
+
+Now, if we create a Robot class, it does not eat or sleep, but still has to implement those methods (maybe leaving them empty). This forces classes to depend on things they don’t need, violating ISP.
+
+Correct Way (With ISP):
+
+We split the big interface into smaller, role-specific interfaces:
+```
+interface Workable {
+    void work();
+}
+
+interface Eatable {
+    void eat();
+}
+
+interface Sleepable {
+    void sleep();
+}
+
+```
+Now, each class implements only what it needs:
+```
+class Human implements Workable, Eatable, Sleepable {
+    public void work() { System.out.println("Human working..."); }
+    public void eat() { System.out.println("Human eating..."); }
+    public void sleep() { System.out.println("Human sleeping..."); }
+}
+
+class Robot implements Workable {
+    public void work() { System.out.println("Robot working..."); }
+}
+```
+
+✔ Human can work, eat, and sleep.
+✔ Robot only works, no unnecessary methods.
+
+### What is the Dependency Inversion Principle (DIP)?
+
+Definition:
+“High-level modules should not depend on low-level modules. Both should depend on abstractions.”
+
+“Abstractions should not depend on details. Details should depend on abstractions.”
+
+Without DIP (bad design):
+
+Let’s say we directly use a low-level class inside a high-level class:
+```
+class PayPalPayment {
+    public void pay() {
+        System.out.println("Paid using PayPal");
+    }
+}
+
+class PaymentProcessor {
+    private PayPalPayment payPal = new PayPalPayment();
+
+    public void process() {
+        payPal.pay();
+    }
+}
+```
+
+🔴 Problem:
+
+PaymentProcessor is tightly coupled to PayPalPayment.
+
+If tomorrow we want to use StripePayment, we need to modify PaymentProcessor code.
+
+This violates the Open/Closed Principle too.
+
+✅ With DIP (good design):
+
+We introduce an abstraction (interface) and make both high- and low-level modules depend on it.
+```
+interface PaymentService {
+    void pay();
+}
+
+class PayPalPayment implements PaymentService {
+    public void pay() {
+        System.out.println("Paid using PayPal");
+    }
+}
+
+class StripePayment implements PaymentService {
+    public void pay() {
+        System.out.println("Paid using Stripe");
+    }
+}
+
+class PaymentProcessor {
+    private PaymentService paymentService;
+
+    // Constructor Injection
+    public PaymentProcessor(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
+
+    public void process() {
+        paymentService.pay();
+    }
+}
+
+
+Now we can easily do:
+public class Main {
+    public static void main(String[] args) {
+        PaymentService service = new PayPalPayment();
+        PaymentProcessor processor = new PaymentProcessor(service);
+        processor.process();
+
+        // Later, easily switch to Stripe without changing PaymentProcessor
+        PaymentService stripe = new StripePayment();
+        processor = new PaymentProcessor(stripe);
+        processor.process();
+    }
+}
+```
