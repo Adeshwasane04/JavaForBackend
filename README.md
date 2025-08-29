@@ -475,3 +475,22 @@ public class Main {
     }
 }
 ```
+
+Q. What is Builder design pattern ?
+he Builder Design Pattern is a creational design pattern in software engineering.
+It is used when you want to construct a complex object step by step while keeping the construction process independent of the parts that make up the object.
+
+ Problem it solves:
+
+When a class has too many parameters (especially optional ones) in the constructor, the code becomes hard to read and maintain.
+
+Example:
+
+Car car = new Car("Red", "V8", true, false, 4, "Automatic");
+
+
+From this, it’s not clear which value represents what. Maintaining such constructors is difficult.
+
+ Solution (Builder Pattern)
+
+Instead of creating the object directly using a constructor, the Builder pattern allows you to build an object step by step using method chaining.
