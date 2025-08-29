@@ -12,7 +12,7 @@ public class Product {
     
     Product(Builder b)
     {
-        //this is called validation we are performing before creation of the object 
+        //this is called validation we are performing before creation of the object and this is the better apporach
         if(b.getPrice(price)>10)
         {
             this.price=b.getPrice(price);

@@ -1,5 +1,9 @@
 import java.util.List;
 
+
+//builder design pattern
+
+// this is the patternn that we use when we have lots of attributes
 public class Builder {
     private String name;
     private int price;
