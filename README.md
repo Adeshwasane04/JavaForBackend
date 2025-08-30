@@ -494,3 +494,64 @@ From this, it’s not clear which value represents what. Maintaining such constr
  Solution (Builder Pattern)
 
 Instead of creating the object directly using a constructor, the Builder pattern allows you to build an object step by step using method chaining.
+
+## How backend architecture works
+
+### Q. What is Client-Server Architrcture?
+-> It is a type of distributed system design where two main entities exist:
+
+ Client → The device/software that requests services (e.g., web browser, mobile app).
+ Server → The system that provides services (e.g., web server, database server).
+
+### Q. What happen we you do www.google.com?
+The browser (client) sends a request to Google’s server.
+The server searches and sends the search page.
+The client displays it on your screen.
+
+### Q. What is server?
+A server is a computer or software program that provides services, resources, or data to other computers (called clients) over a network.
+
+Types of Servers : 
+Web Server – serves web pages (e.g., Apache, Nginx).
+Database Server – stores & provides database access (e.g., MySQL, MongoDB).
+File Server – stores and shares files.
+Mail Server – handles sending/receiving emails.
+Application Server – runs applications and provides business logic.
+
+
+### Q What is vertical Scalling and horizonatal scalling in server ?
+-> Means adding more power (CPU, RAM, storage) to your existing server/machine.
+You keep the same machine but make it stronger.
+
+Example:
+
+You have a laptop with 8 GB RAM. You upgrade it to 16 GB RAM.
+Or your server has 4 CPUs, you upgrade it to 8 CPUs.
+
+2. Horizontal Scaling (Scaling Out)
+
+Means adding more machines/servers to handle the load.
+You distribute the work among multiple servers.
+ Example:
+Instead of making one super powerful server, you add 10 normal servers and use a load balancer to distribute requests.
+
+
+## DataBases
+
+### Q. What is file base system? and what are the issue arises with the file Based system ?
+-> A file-based system is the traditional way of storing and managing data before databases (like DBMS) became popular.
+
+Data is stored in separate files (e.g., text files, spreadsheets, flat files).
+Each application manages its own data using files.
+There is no central management of data.
+
+ISSUES: 
+1. data rebundancey
+2. data inconsistency
+3. security
+4. diffucult data occur
+
+### Q. What is database schema?
+-> It is a blueprint or a logical structure of the database. It define how the data is organized how the table is related 
+   and what rules apply to the database.
+   A schema contains tables, views, indexes, relationships, procedures, etc.
