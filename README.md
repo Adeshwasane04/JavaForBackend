@@ -555,3 +555,44 @@ ISSUES:
 -> It is a blueprint or a logical structure of the database. It define how the data is organized how the table is related 
    and what rules apply to the database.
    A schema contains tables, views, indexes, relationships, procedures, etc.
+
+### Q. Functional Dependency in SQL?
+->A functional dependency (FD) is a relationship between two attributes (columns) in a table.
+It means:
+If you know the value of one attribute (or a set of attributes), you can uniquely determine the value of another attribute.
+
+Notation
+We write it as:
+X → Y
+Which means:
+
+Attribute X determines attribute Y.
+
+For each value of X, there is only one possible value of Y.
+
+### Q. What is axioms in SQL?
+-> In SQL, the term axioms usually refers to the Armstrong’s Axioms.
+These are a set of inference rules used in relational database theory to reason about functional dependencies (FDs) in a relation.
+
+ They are the foundation for normalization and help in finding candidate keys, closures, and minimal covers of functional dependencies.
+ Armstrong’s Axioms in SQL (Functional Dependency Theory):
+
+There are three basic axioms:
+
+1. Reflexivity Rule
+
+If Y ⊆ X, then X → Y.
+
+Example: If (roll_no, name) is a set of attributes, then {roll_no, name} → roll_no.
+
+Augmentation Rule
+
+If X → Y, then XZ → YZ (where Z is any set of attributes).
+
+Example: If roll_no → name, then {roll_no, class} → {name, class}.
+
+Transitivity Rule
+
+If X → Y and Y → Z, then X → Z.
+
+Example: If roll_no → name and name → address, then roll_no → address.
