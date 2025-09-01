@@ -585,13 +585,13 @@ If Y ⊆ X, then X → Y.
 
 Example: If (roll_no, name) is a set of attributes, then {roll_no, name} → roll_no.
 
-Augmentation Rule
+2. Augmentation Rule
 
 If X → Y, then XZ → YZ (where Z is any set of attributes).
 
 Example: If roll_no → name, then {roll_no, class} → {name, class}.
 
-Transitivity Rule
+3. Transitivity Rule
 
 If X → Y and Y → Z, then X → Z.
 
