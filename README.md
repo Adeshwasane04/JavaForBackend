@@ -604,14 +604,15 @@ A column (or set of columns) that uniquely identifies each row in a table.
 No duplicates and cannot be NULL.
 Each table can have only one primary key.
 
-``` CREATE TABLE Students (
+```
+ CREATE TABLE Students (
     student_id INT PRIMARY KEY,
     name VARCHAR(50)
 );
 ```
 
 2. Candidate Key:
-
+A minimum set of attributes(column) that uniquey identifies as a record.
 All possible columns that can qualify as a Primary Key.
 From candidate keys, one is chosen as the Primary Key.
  Example: In a Students table, both student_id and email could uniquely identify a student → both are candidate keys.
@@ -622,3 +623,35 @@ Any set of attributes (columns) that can uniquely identify a row.
 A Primary Key is always a Super Key, but a Super Key may have extra attributes.
 
  Example: {student_id}, {student_id, name} are both super keys.
+
+ 4. Composite Key (or Compound Key)
+
+ A composite key means a key that consist of two more than two attributes but together unqiuely indentifies records 
+ the attributes that form a composite key are not any key independent.
+
+ ```
+ CREATE TABLE Course_Enrollments (
+    student_id INT,
+    course_id INT,
+    PRIMARY KEY(student_id, course_id) //here this is composite key
+);
+
+```
+
+5.ALternate key
+
+All the candidate key apart from the primary key are Alternate kay.
+Example: If student_id is the primary key, then email becomes the alternate key.
+
+6. Foreign Key
+
+A column that creates a relationship between two tables.
+It refers to the Primary Key of another table.
+
+```
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    student_id INT,
+    FOREIGN KEY(student_id) REFERENCES Students(student_id)
+);
+```
