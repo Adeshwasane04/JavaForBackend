@@ -655,3 +655,154 @@ CREATE TABLE Orders (
     FOREIGN KEY(student_id) REFERENCES Students(student_id)
 );
 ```
+
+### Q. What is Attribute Closure ?
+-> The closure of an attribute set A, written as A⁺, is the set of all attributes that can be functionally determined from A, given a set of functional dependencies (FDs).
+
+It’s used to:
+Find candidate key
+Check if a set of attributes is a superkey
+Test if a functional dependency holds
+
+ Steps to find closure (A⁺):
+
+Start with A⁺ = A (the attributes themselves).
+
+Apply functional dependencies repeatedly:
+
+If X → Y and X ⊆ A⁺, then add Y to A⁺.
+
+Repeat until no more attributes can be added.
+
+ Example
+
+Suppose relation R(A, B, C, D) with functional dependencies:
+
+A → B  
+B → C  
+C → D
+
+
+Find closure of {A}:
+
+Start: A⁺ = {A}
+
+From A → B → add B → {A, B}
+
+From B → C → add C → {A, B, C}
+
+From C → D → add D → {A, B, C, D}
+
+ So A⁺ = {A, B, C, D} → A is a candidate key for R.
+
+ ### Q. What is Normalization ?
+ ->Normalization is the process of organizing data in a database to reduce redundancy (duplicate data) and improve data integrity.
+
+In short:
+
+It breaks large, complex tables into smaller ones.
+
+It ensures data is stored logically and efficiently.
+
+It avoids problems like update anomalies, insertion anomalies, and deletion anomalies.
+
+## Normal Forms (Levels of Normalization)
+
+1. First Normal Form (1NF):
+
+Each column should have atomic (indivisible) values and 
+No repeating groups or arrays.
+
+Example:If there is one person having multiple phone numbers
+ Instead of storing multiple phone numbers in one column, create separate rows.
+ because should be easier to perrform updating on it rather than traversing each array 
+
+ 2. Second Normal Form (2NF):
+ It is already in First Normal Form (1NF) (no repeating groups, atomic values).
+ No partial dependency exists — i.e., every non-key attribute must depend on the whole primary key, not just part of it.
+
+ ``` 
+ Example (Before 2NF – Not in 2NF)
+Table: Student_Course
+StudentID	CourseID	StudentName	CourseName
+1	101	John	DBMS
+2	101	Alice	DBMS
+1	102	John	Networks
+
+ Primary Key = (StudentID, CourseID) (composite key).
+
+StudentName depends only on StudentID (partial dependency).
+
+CourseName depends only on CourseID (partial dependency).
+
+This violates 2NF ❌
+
+ After Applying 2NF
+
+We split the table into two or more tables:
+
+Students Table
+
+StudentID	StudentName
+1	John
+2	Alice
+
+Courses Table
+
+CourseID	CourseName
+101	DBMS
+102	Networks
+
+Enrollment Table
+
+StudentID	CourseID
+1	101
+2	101
+1	102
+
+and link them with primary key and foreign key and we can perform operation through joins
+```
+3. Third Normal Form (3NF):
+
+It is already in Second Normal Form (2NF).
+There is no transitive dependency.
+i.e., non-key attributes should depend only on the primary key, not on other non-key attributes.
+
+```
+| StudentID | StudentName | DepartmentID | DepartmentName |
+| --------- | ----------- | ------------ | -------------- |
+| 1         | John        | 101          | Computer Sci   |
+| 2         | Alice       | 102          | Electronics    |
+| 3         | Bob         | 101          | Computer Sci   |
+```
+Primary Key = StudentID
+
+StudentName depends directly on StudentID ✔️
+
+But DepartmentName depends on DepartmentID, not directly on StudentID ❌
+→ This is a transitive dependency.
+
+After Applying 3NF
+
+We split into two tables:
+```
+| StudentID | StudentName | DepartmentID |
+| --------- | ----------- | ------------ |
+| 1         | John        | 101          |
+| 2         | Alice       | 102          |
+| 3         | Bob         | 101          |
+```
+```
+| DepartmentID | DepartmentName |
+| ------------ | -------------- |
+| 101          | Computer Sci   |
+| 102          | Electronics    |
+
+```
+Now:
+
+DepartmentName depends only on DepartmentID.
+
+No non-key attribute depends on another non-key attribute.
+
+3NF achieved 
