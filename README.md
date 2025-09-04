@@ -596,3 +596,29 @@ Example: If roll_no → name, then {roll_no, class} → {name, class}.
 If X → Y and Y → Z, then X → Z.
 
 Example: If roll_no → name and name → address, then roll_no → address.
+
+### Q.What are the different types of keys in SQL?
+-> 1. Primary Key
+
+A column (or set of columns) that uniquely identifies each row in a table.
+No duplicates and cannot be NULL.
+Each table can have only one primary key.
+
+``` CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+```
+
+2. Candidate Key:
+
+All possible columns that can qualify as a Primary Key.
+From candidate keys, one is chosen as the Primary Key.
+ Example: In a Students table, both student_id and email could uniquely identify a student → both are candidate keys.
+
+ 3. Super Key
+
+Any set of attributes (columns) that can uniquely identify a row.
+A Primary Key is always a Super Key, but a Super Key may have extra attributes.
+
+ Example: {student_id}, {student_id, name} are both super keys.
